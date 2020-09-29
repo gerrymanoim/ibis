@@ -27,7 +27,7 @@ jobs:
     - name: set up environment
       run: |
         conda activate base
-        ./ci/basic_setup_env.sh "${{ matrix.python_version }}" "$BACKENDS"
+        ./ci/setup_env.sh "${{ matrix.python_version }}" "$BACKENDS"
       shell: bash -l {0}
 
     - name: run tests
@@ -66,12 +66,18 @@ jobs:
     steps:
     - name: checkout
       uses: actions/checkout@v1
+    - uses: conda-incubator/setup-miniconda@v1
+      with:
+        auto-update-conda: true
+        python-version: ${{ matrix.python-version }}
 
     - name: set up environment
       run: ./ci/setup_env.sh "${{ matrix.python_version }}" "$BACKENDS"
+      shell: bash -l {0}
 
     - name: run tests
       run: PYTEST_BACKENDS=$BACKENDS PYTEST_EXPRESSION="not udf and not hdfs" ./ci/run_tests.sh
+      shell: bash -l {0}
 
   Tests_impala_clickhouse:
     name: Tests Impala / Clickhouse
@@ -115,12 +121,18 @@ jobs:
     steps:
     - name: checkout
       uses: actions/checkout@v1
+    - uses: conda-incubator/setup-miniconda@v1
+      with:
+        auto-update-conda: true
+        python-version: ${{ matrix.python-version }}
 
     - name: set up environment
       run: ./ci/setup_env.sh "${{ matrix.python_version }}" "$BACKENDS"
+      shell: bash -l {0}
 
     - name: run tests
       run: PYTEST_BACKENDS=$BACKENDS ./ci/run_tests.sh
+      shell: bash -l {0}
 
   Tests_omniscidb:
     name: Tests OmniSciDB
@@ -142,6 +154,10 @@ jobs:
     steps:
     - name: checkout
       uses: actions/checkout@v1
+    - uses: conda-incubator/setup-miniconda@v1
+      with:
+        auto-update-conda: true
+        python-version: ${{ matrix.python-version }}
 
     - name: set up environment
       run: ./ci/setup_env.sh "${{ matrix.python_version }}" "$BACKENDS"
@@ -161,6 +177,10 @@ jobs:
     steps:
     - name: checkout
       uses: actions/checkout@v1
+    - uses: conda-incubator/setup-miniconda@v1
+      with:
+        auto-update-conda: true
+        python-version: ${{ matrix.python-version }}
 
     - name: set up environment
       run: ./ci/setup_env.sh "${{ matrix.python_version }}" "$BACKENDS"
@@ -176,6 +196,11 @@ jobs:
 
     - name: checkout
       uses: actions/checkout@v1
+
+    - uses: conda-incubator/setup-miniconda@v1
+      with:
+        auto-update-conda: true
+        python-version: ${{ matrix.python-version }}
 
     - name: set up environment
       run: ./ci/setup_env.sh
@@ -217,6 +242,12 @@ jobs:
 
     - name: checkout
       uses: actions/checkout@v1
+
+    - uses: conda-incubator/setup-miniconda@v1
+      with:
+        auto-update-conda: true
+        python-version: ${{ matrix.python-version }}
+
 
     - name: set up environment
       run: ./ci/setup_env.sh
