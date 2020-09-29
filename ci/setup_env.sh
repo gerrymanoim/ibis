@@ -10,7 +10,6 @@ BACKENDS="$2"
 echo "PYTHON_VERSION: $PYTHON_VERSION"
 echo "BACKENDS: $BACKENDS"
 
-conda env update -n base --file=environment.yml
 python -m pip install -e .
 
 if [[ -n "$BACKENDS" ]]; then
@@ -22,10 +21,10 @@ if [[ -n "$BACKENDS" ]]; then
         # (if there are dependencies). For other python versions we simply install
         # the normal dependencies if they exist.
         if [[ $PYTHON_VERSION == "3.7" && -f "ci/deps/$BACKEND-min.yml" ]]; then
-            conda install -n base -c conda-forge --file="ci/deps/$BACKEND-min.yml"
+            conda install -c conda-forge --file="ci/deps/$BACKEND-min.yml"
         else
             if [[ -f "ci/deps/$BACKEND.yml" ]]; then
-                conda install -n base -c conda-forge --file="ci/deps/$BACKEND.yml"
+                conda install -c conda-forge --file="ci/deps/$BACKEND.yml"
             fi
         fi
 
