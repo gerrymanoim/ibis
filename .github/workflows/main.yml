@@ -23,7 +23,7 @@ jobs:
     - uses: conda-incubator/setup-miniconda@v1
       with:
         auto-update-conda: true
-        python-version: ${{ matrix.python-version }}
+        python-version: ${{ matrix.python_version }}
     - name: set up environment
       run: |
         conda activate base
@@ -71,7 +71,7 @@ jobs:
       with:
         auto-update-conda: true
         activate-environment: ""
-        python-version: ${{ matrix.python-version }}
+        python-version: ${{ matrix.python_version }}
 
     - name: set up environment
       run: ./ci/setup_env.sh "${{ matrix.python_version }}" "$BACKENDS"
@@ -128,7 +128,7 @@ jobs:
       with:
         auto-update-conda: true
         activate-environment: ""
-        python-version: ${{ matrix.python-version }}
+        python-version: ${{ matrix.python_version }}
 
     - name: set up environment
       run: ./ci/setup_env.sh "${{ matrix.python_version }}" "$BACKENDS"
@@ -163,7 +163,7 @@ jobs:
       with:
         auto-update-conda: true
         activate-environment: ""
-        python-version: ${{ matrix.python-version }}
+        python-version: ${{ matrix.python_version }}
 
     - name: set up environment
       run: ./ci/setup_env.sh "${{ matrix.python_version }}" "$BACKENDS"
@@ -190,7 +190,7 @@ jobs:
       with:
         auto-update-conda: true
         activate-environment: ""
-        python-version: ${{ matrix.python-version }}
+        python-version: ${{ matrix.python_version }}
 
     - name: set up environment
       run: ./ci/setup_env.sh "${{ matrix.python_version }}" "$BACKENDS"
@@ -213,7 +213,7 @@ jobs:
       with:
         auto-update-conda: true
         activate-environment: ""
-        python-version: ${{ matrix.python-version }}
+        python-version: ${{ matrix.python_version }}
 
     - name: set up environment
       run: ./ci/setup_env.sh
@@ -266,7 +266,7 @@ jobs:
       with:
         auto-update-conda: true
         activate-environment: ""
-        python-version: ${{ matrix.python-version }}
+        python-version: ${{ matrix.python_version }}
 
     - name: set up environment
       run: ./ci/setup_env.sh
