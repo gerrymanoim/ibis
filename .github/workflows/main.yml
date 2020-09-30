@@ -87,7 +87,6 @@ jobs:
   Tests_impala_clickhouse:
     name: Tests Impala / Clickhouse
     runs-on: ubuntu-latest
-    if: false # TODO: temporary disabling this build, since the impala container seems to not be starting properly
     env:
       BACKENDS: "impala clickhouse"
     strategy:
