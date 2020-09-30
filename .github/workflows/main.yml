@@ -149,7 +149,7 @@ jobs:
         IBIS_TEST_IMPALA_HOST: "impala"
         IBIS_TEST_NN_HOST: "impala"
       run: |
-        conda actiavte ibis-dev
+        conda activate ibis-dev
         ./ci/setup_env.sh "${{ matrix.python_version }}" "$BACKENDS"
       shell: bash -l {0}
 

@@ -53,7 +53,7 @@ class IbisTestEnv:
     @property
     def test_data_dir(self):
         return os.environ.get(
-            'IBIS_TEST_DATA_HDFS_DIR', '/_ibis/ibis-testing-data'
+            'IBIS_TEST_DATA_HDFS_DIR', '/__ibis/ibis-testing-data'
         )
 
     @property
