@@ -138,7 +138,7 @@ jobs:
 
     - name: setup conda
       run: |
-        conda create --name ibis-dev python=${{ matrix.python_version }}
+        conda create --name ibis-dev python=${{ matrix.python_version }} pip
         conda activate ibis-dev
         conda env update --file environment.yml
       shell: bash -l {0}
@@ -148,11 +148,15 @@ jobs:
       env:
         IBIS_TEST_IMPALA_HOST: "impala"
         IBIS_TEST_NN_HOST: "impala"
-      run: ./ci/setup_env.sh "${{ matrix.python_version }}" "$BACKENDS"
+      run: |
+        conda actiavte ibis-dev
+        ./ci/setup_env.sh "${{ matrix.python_version }}" "$BACKENDS"
       shell: bash -l {0}
 
     - name: run tests
-      run: PYTEST_BACKENDS=$BACKENDS ./ci/run_tests.sh
+      run: |
+        conda activate ibis-dev
+        PYTEST_BACKENDS=$BACKENDS ./ci/run_tests.sh
       shell: bash -l {0}
 
   # Tests_omniscidb:
