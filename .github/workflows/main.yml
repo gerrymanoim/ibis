@@ -94,7 +94,7 @@ jobs:
       matrix:
         python_version: ["3.7", "3.8"]
     services:
-      impala:
+      impala-nw:
         image: ibisproject/impala:latest
         env:
           PGPASSWORD: postgres
