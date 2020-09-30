@@ -136,12 +136,13 @@ jobs:
     - name: check host settings
       run: cat /etc/hosts
 
-    - uses: conda-incubator/setup-miniconda@v1
-      with:
-        auto-update-conda: true
-        python-version: ${{ matrix.python_version }}
-        activate-environment: "ibis-dev"
-        environment-file: "environment.yml"
+    - name: setup conda
+      run: |
+        conda create --name ibis-dev python=${{ matrix.python_version }}
+        conda activate ibis-dev
+        conda env update --file environment.yml
+      shell: bash -l {0}
+
 
     - name: set up environment
       env:
