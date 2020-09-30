@@ -7,6 +7,8 @@ from io import BytesIO
 from pathlib import Path
 
 import click
+import requests
+from requests.api import request
 import toolz
 from plumbum import CommandNotFound, local
 from plumbum.cmd import cmake, make
@@ -42,6 +44,7 @@ def make_ibis_client(env):
         auth_mechanism=env.auth_mechanism,
         verify=env.auth_mechanism not in ['GSSAPI', 'LDAP'],
         user=env.webhdfs_user,
+        session=requests.Session(),
     )
     auth_mechanism = env.auth_mechanism
     if auth_mechanism == 'GSSAPI' or auth_mechanism == 'LDAP':
