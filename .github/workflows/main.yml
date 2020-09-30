@@ -144,8 +144,8 @@ jobs:
         activate-environment: "ibis-dev"
         environment-file: "environment.yml"
 
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
+    # - name: Setup tmate session
+    #   uses: mxschmitt/action-tmate@v3
 
 
     - name: set up environment

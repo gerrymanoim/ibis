@@ -7,7 +7,6 @@ from io import BytesIO
 from pathlib import Path
 
 import click
-import requests
 from requests.api import request
 import toolz
 from plumbum import CommandNotFound, local
@@ -23,6 +22,25 @@ DATA_DIR = Path(
         'IBIS_TEST_DATA_DIRECTORY', SCRIPT_DIR / 'ibis-testing-data'
     )
 )
+
+
+"""
+Losts of requests logging
+"""
+import requests
+import logging
+
+import http.client as http_client
+
+http_client.HTTPConnection.debuglevel = 1
+
+# You must initialize logging, otherwise you'll not see debug output.
+logging.basicConfig()
+logging.getLogger().setLevel(logging.DEBUG)
+requests_log = logging.getLogger("requests.packages.urllib3")
+requests_log.setLevel(logging.DEBUG)
+requests_log.propagate = True
+
 
 
 logger = ibis.util.get_logger(Path(__file__).with_suffix('').name)
