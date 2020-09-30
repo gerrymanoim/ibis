@@ -87,7 +87,7 @@ jobs:
   Tests_impala_clickhouse:
     name: Tests Impala / Clickhouse
     runs-on: ubuntu-latest
-    container: node:12.6-buster-slim
+    container: continuumio:miniconda3
     env:
       BACKENDS: "impala clickhouse"
     strategy:
