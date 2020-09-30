@@ -7,6 +7,7 @@ from io import BytesIO
 from pathlib import Path
 
 import click
+from requests.api import request
 import toolz
 from plumbum import CommandNotFound, local
 from plumbum.cmd import cmake, make
@@ -21,6 +22,25 @@ DATA_DIR = Path(
         'IBIS_TEST_DATA_DIRECTORY', SCRIPT_DIR / 'ibis-testing-data'
     )
 )
+
+
+"""
+Losts of requests logging
+"""
+import requests
+import logging
+
+import http.client as http_client
+
+http_client.HTTPConnection.debuglevel = 1
+
+# You must initialize logging, otherwise you'll not see debug output.
+logging.basicConfig()
+logging.getLogger().setLevel(logging.DEBUG)
+requests_log = logging.getLogger("requests.packages.urllib3")
+requests_log.setLevel(logging.DEBUG)
+requests_log.propagate = True
+
 
 
 logger = ibis.util.get_logger(Path(__file__).with_suffix('').name)
@@ -42,6 +62,7 @@ def make_ibis_client(env):
         auth_mechanism=env.auth_mechanism,
         verify=env.auth_mechanism not in ['GSSAPI', 'LDAP'],
         user=env.webhdfs_user,
+        session=requests.Session(),
     )
     auth_mechanism = env.auth_mechanism
     if auth_mechanism == 'GSSAPI' or auth_mechanism == 'LDAP':
