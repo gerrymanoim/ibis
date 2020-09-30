@@ -144,6 +144,10 @@ jobs:
         activate-environment: "ibis-dev"
         environment-file: "environment.yml"
 
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
+
+
     - name: set up environment
       run: ./ci/setup_env.sh "${{ matrix.python_version }}" "$BACKENDS"
       shell: bash -l {0}
