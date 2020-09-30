@@ -132,6 +132,9 @@ jobs:
     - name: checkout
       uses: actions/checkout@v1
 
+    - name: check host settings
+      run: cat /etc/hosts
+
     - uses: conda-incubator/setup-miniconda@v1
       with:
         auto-update-conda: true
