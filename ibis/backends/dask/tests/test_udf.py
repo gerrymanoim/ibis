@@ -246,9 +246,8 @@ def test_udaf_analytic(con, t, df):
     tm.assert_series_equal(result, expected)
 
 
-@pytest.mark.xfail(
-    raises=NotImplementedError, reason='TODO - windowing - #2553'
-)
+# these are named differenty.
+# I don't know where the rename happen
 def test_udaf_analytic_groupby(con, t, df):
     expr = zscore(t.c).over(ibis.window(group_by=t.key))
 

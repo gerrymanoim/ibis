@@ -587,9 +587,9 @@ def test_elementwise_udf_struct(backend, alltypes):
     backend.assert_frame_equal(result, expected)
 
 
-@pytest.mark.only_on_backends(['pandas'])
+@pytest.mark.only_on_backends(['pandas', 'dask'])
 # TODO - windowing - #2553
-@pytest.mark.xfail_backends(['dask'])
+# @pytest.mark.xfail_backends(['dask'])
 @pytest.mark.parametrize('udf', demean_struct_udfs)
 def test_analytic_udf_destruct(backend, alltypes, udf):
     w = window(preceding=None, following=None, group_by='year')
@@ -606,9 +606,7 @@ def test_analytic_udf_destruct(backend, alltypes, udf):
     backend.assert_frame_equal(result, expected)
 
 
-@pytest.mark.only_on_backends(['pandas'])
-# TODO - udf - #2553
-@pytest.mark.xfail_backends(['dask'])
+@pytest.mark.only_on_backends(['pandas', 'dask'])
 def test_analytic_udf_destruct_no_groupby(backend, alltypes):
     w = window(preceding=None, following=None)
 
@@ -629,9 +627,9 @@ def test_analytic_udf_destruct_no_groupby(backend, alltypes):
     backend.assert_frame_equal(result, expected)
 
 
-@pytest.mark.only_on_backends(['pandas', 'pyspark'])
+@pytest.mark.only_on_backends(['pandas', 'pyspark', 'dask'])
 # TODO - windowing - #2553
-@pytest.mark.xfail_backends(['dask'])
+# @pytest.mark.xfail_backends(['dask'])
 @pytest.mark.xfail_unsupported
 def test_analytic_udf_destruct_overwrite(backend, alltypes):
     w = window(preceding=None, following=None, group_by='year')

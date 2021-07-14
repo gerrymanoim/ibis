@@ -76,6 +76,7 @@ def compute_projection_column_expr(
     timecontext: Optional[TimeContext],
     **kwargs,
 ):
+    # breakpoint()
     result_name = getattr(expr, '_name', None)
     op = expr.op()
     parent_table_op = parent.table.op()
@@ -119,6 +120,7 @@ def compute_projection_column_expr(
     )
 
     result = execute(expr, scope=scope, timecontext=timecontext, **kwargs)
+    # breakpoint()
     result = coerce_to_output(result, expr, data.index)
     assert result_name is not None, 'Column selection name is None'
 
@@ -155,7 +157,7 @@ def execute_selection_dataframe(
                 **kwargs,
             )
             data_pieces.append(dask_object)
-
+        # breakpoint()
         result = dd.concat(data_pieces, axis=1)
         result.reset_index(drop=True)
 

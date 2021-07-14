@@ -168,6 +168,11 @@ def pre_execute_analytic_and_reduction_udf(op, *clients, scope=None, **kwargs):
         type(op), *(itertools.repeat(ddgb.SeriesGroupBy, nargs))
     )
     def execute_udaf_node_groupby(op, *args, aggcontext, **kwargs):
+        # breakpoint()
+        if isinstance(op, ops.AnalyticVectorizedUDF):
+            # breakpoint()
+            pass
+
         # To apply a udf func to a list of grouped series we:
         # 1. Grab the dataframe they're grouped off of
         # 2. Grab the column name for each series
@@ -188,6 +193,7 @@ def pre_execute_analytic_and_reduction_udf(op, *clients, scope=None, **kwargs):
             cols = (df[col] for col in col_names)
             return apply_func(*cols)
 
+        # breakpoint()
         if len(groupings) > 1:
             meta_index = pandas.MultiIndex.from_arrays(
                 [[0], [0]], names=groupings
